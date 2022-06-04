@@ -60,6 +60,9 @@ jobs:
         # Destination path 
         path: /var/www/demo-app
         
-      
+    - name: Restart the app
+      run: |
+          export XDG_RUNTIME_DIR=/run/user/$(id -u)
+          systemctl --user restart demo-app.service
     
 
