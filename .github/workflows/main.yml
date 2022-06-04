@@ -1,7 +1,7 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Demo 1 Build Only
-
+#name: Demo 1 Build Only
+name: Demo 2 Build And Release
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -45,4 +45,21 @@ jobs:
         with: 
          name: demo-app-build 
          path: app/build 
+         
+  release:
+    needs: build
+    runs-on: prod
+    
+    steps:
+    
+    - name: Download a Build Artifact  
+      uses: actions/download-artifact@v3.0.0 
+      with: 
+        # Artifact name 
+        name: demo-app-build 
+        # Destination path 
+        path: /var/www/demo-app
+        
+      
+    
 
